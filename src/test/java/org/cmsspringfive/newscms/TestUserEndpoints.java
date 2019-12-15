@@ -1,7 +1,6 @@
 package org.cmsspringfive.newscms;
 
-
-import org.cmsspringfive.newscms.domain.models.Category;
+import org.cmsspringfive.newscms.domain.models.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -10,10 +9,9 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TestCategoryEndpoints {
-
+public class TestUserEndpoints {
     @Mock
-    private Category category;
+    private User user;
 
     @BeforeAll
     public void setupMock(){
@@ -21,9 +19,7 @@ public class TestCategoryEndpoints {
     }
 
     @Test
-    public void testMockCreation(){assertNotNull(category);
+    public void testMockCreation(){
+        assertNotNull(user);
     }
-
-
-
 }
