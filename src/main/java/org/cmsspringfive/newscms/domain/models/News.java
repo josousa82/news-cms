@@ -19,4 +19,15 @@ public class News {
     Set<Tag> tags;
 
 
+    public Review review(String userId, String status){
+        final Review review = new Review(userId, status);
+        this.reviewers.add(review);
+        return review;
+    }
+
+    public Boolean revised(){
+        return this.mandatoryReviewers.stream().allMatch(reviewer -> this.reviewers.stream()
+                .anyMatch(review -> reviewer.id.equals(review.userId) && "approved".equals(review.status));
+    }
+
 }
