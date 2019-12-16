@@ -1,6 +1,8 @@
 package org.cmsspringfive.newscms.domain.models;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.Set;
 
@@ -10,7 +12,6 @@ public class News {
     String id;
     String title;
     String content;
-
     User author;
 
     Set<User> mandatoryReviewers;
