@@ -33,7 +33,6 @@ public class CategoryResource {
          @ApiResponse(code = 200, message = "Category found"),
          @ApiResponse(code = 400, message = "Category not found")
     })
-
     public ResponseEntity<Category> findOne(@PathVariable("id") String id){
         return ResponseEntity.ok(new Category());
     }
