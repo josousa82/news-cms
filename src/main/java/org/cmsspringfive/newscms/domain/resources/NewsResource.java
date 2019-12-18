@@ -4,6 +4,7 @@ import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.models.News;
 import org.cmsspringfive.newscms.domain.models.Review;
 import org.cmsspringfive.newscms.domain.vo.NewsRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/news/")
 public class NewsResource {
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<News> findOne(@PathVariable(value = "id") String id){

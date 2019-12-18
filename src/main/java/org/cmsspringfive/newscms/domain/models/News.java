@@ -12,6 +12,7 @@ public class News {
     String id;
     String title;
     String content;
+
     User author;
 
     Set<User> mandatoryReviewers;

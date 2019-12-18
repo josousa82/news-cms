@@ -35,12 +35,12 @@ public class UserService {
     }
 
     public void delete(String id){
-        final User user = userRepository.findOme(id);
-        return this.userRepository.delete(user);
+        final User user = userRepository.findOne(id);
+         this.userRepository.delete(user);
     }
 
     public List<User> findAll(){
-        return this.userRepository.findall();
+        return this.userRepository.findAll();
     }
 
     public User findOne(String id){
