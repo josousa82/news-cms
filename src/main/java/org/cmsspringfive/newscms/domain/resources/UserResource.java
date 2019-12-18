@@ -15,11 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@Api(tags = "category", description = "Category API")
+@Api(tags = "User", description = "User API")
 public class UserResource {
 
     @GetMapping(value = "/{id}")
-    @ApiOperation(value = "Find user", notes = "Find the user by ID")
+    @ApiOperation(value = "Find User", notes = "Find the user by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User found"),
             @ApiResponse(code = 400, message = "User not found")
