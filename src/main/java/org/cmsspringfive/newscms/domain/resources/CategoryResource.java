@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/category")
-@Api(tags = "category", description = "Category API")
+@Api(tags = "Category", description = "Category API")
 
 public class CategoryResource {
 
