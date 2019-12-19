@@ -36,6 +36,7 @@ public class NewsService {
     }
 
     public News findOne(String id){
-        return null;
+        return this.newsRepository.findOne(id);
     }
+
 }

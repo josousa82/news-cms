@@ -99,6 +99,7 @@ public class NewsResource {
             @ApiResponse(code = 404, message = "Invalid request")
     })
     public ResponseEntity<List<News>> revisedNews(){
+
         return ResponseEntity.ok(Arrays.asList(new News(), new News()));
     }
 }
