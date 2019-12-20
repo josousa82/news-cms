@@ -4,10 +4,12 @@ import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.repository.CategoryRepository;
 import org.cmsspringfive.newscms.domain.vo.CategoryRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
