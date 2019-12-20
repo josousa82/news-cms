@@ -58,6 +58,7 @@ public class UserResource {
             @ApiResponse(code = 400, message = "User not found")
     })
     public void removeUser(@PathVariable(value = "id") String id){
+
     }
 
     @PutMapping("/{id}")

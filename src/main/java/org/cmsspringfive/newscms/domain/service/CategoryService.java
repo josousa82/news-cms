@@ -52,12 +52,14 @@ public class CategoryService {
         return this.categoryRepository.findByNameIgnoreCaseStartingWith(name);
     }
 
-    public Category findOne(String id) {
+    public Category findOne(String id) throws CategoryNotFoundException {
+
         final Optional<Category> category = this.categoryRepository.findById(id);
+
         if(category.isPresent()){
             return category.get();
         }else{
-            throw new CategoryNotFoundException(id);
+            throw new CategoryNotFoundException("Category with id " + id + " not found.");
         }
     }
 
