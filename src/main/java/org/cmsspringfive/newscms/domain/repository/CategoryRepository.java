@@ -1,25 +1,15 @@
 package org.cmsspringfive.newscms.domain.repository;
 
 import org.cmsspringfive.newscms.domain.models.Category;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@Service
-public class CategoryRepository {
+public interface CategoryRepository  extends JpaRepository<Category, String> {
 
-    public Category save(Category category) {
-        return null;
-    }
+    List<Category> findByName(String name);
 
-    public Category findOne(String id) {
-        return null;
-    }
+    List<Category> findByNameIgnoreCaseStartingWith(String name);
 
-    public void delete(Category category) {
-    }
-
-    public List<Category> findAll() {
-        return null;
-    }
 }
+

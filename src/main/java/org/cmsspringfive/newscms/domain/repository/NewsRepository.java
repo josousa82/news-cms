@@ -1,15 +1,8 @@
 package org.cmsspringfive.newscms.domain.repository;
 
 import org.cmsspringfive.newscms.domain.models.News;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Service
-public class NewsRepository {
-    public News findOne(String id) {
-        return null;
-    }
+public interface NewsRepository  extends JpaRepository<News, String> {
 
-    public News save(News news) {
-        return null;
-    }
 }
