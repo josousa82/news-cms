@@ -3,22 +3,38 @@ package org.cmsspringfive.newscms.domain.models;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Entity
+@Table(name = "news")
 public class News {
 
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     String id;
     String title;
     String content;
 
+    @ManyToOne
     User author;
 
-    Set<User> mandatoryReviewers;
-    Set<Review> reviewers;
-    Set<Category> categories;
-    Set<Tag> tags;
+    @OneToMany
+    Set<User> mandatoryReviewers = new HashSet<>();
+
+    @ElementCollection
+    Set<Review> reviewers = new HashSet<>();
+
+    @OneToMany
+    Set<Category> categories = new HashSet<>();
+
+    @ElementCollection
+    Set<Tag> tags = new HashSet<>();
 
 
     public Review review(String userId, String status){
