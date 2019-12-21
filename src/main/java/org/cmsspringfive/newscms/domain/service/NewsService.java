@@ -1,13 +1,18 @@
 package org.cmsspringfive.newscms.domain.service;
 
+import com.google.common.collect.Lists;
 import org.cmsspringfive.newscms.domain.exceptions.NewsNotFoundException;
 import org.cmsspringfive.newscms.domain.models.News;
+import org.cmsspringfive.newscms.domain.models.User;
 import org.cmsspringfive.newscms.domain.repository.NewsRepository;
 import org.cmsspringfive.newscms.domain.vo.NewsRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,18 +41,38 @@ public class NewsService {
         }
     }
 
+    @Transactional
     public News create(NewsRequest newsRequest){
 
         final News news = new News();
 
-        // should be get last id from
-        news.setId(UUID.randomUUID().toString());
         news.setTitle(newsRequest.getTitle());
         news.setContent(newsRequest.getContent());
         news.setCategories(newsRequest.getCategories());
+        news.setTags(newsRequest.getTags());
         return this.newsRepository.save(news);
     }
 
+    @Transactional
+    public void removeNews(String id){
+
+        final Optional<News> news = this.newsRepository.findById(id);
+
+        if (news.isPresent()){
+             this.newsRepository.delete(news.get());
+        }else {
+            throw new NewsNotFoundException("News with id " + id + " not found.");
+        }
+    }
+
+    public List<News> findAll(){
+        return Lists.newArrayList(newsRepository.findAll());
+    }
+
+    public ResponseEntity<List<News>> revisedNews(){
+
+        return null;
+    }
     public News findOne(String id){
         return null; //this.newsRepository.findOne(id);
     }

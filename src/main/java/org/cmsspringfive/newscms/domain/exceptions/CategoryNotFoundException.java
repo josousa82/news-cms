@@ -12,8 +12,8 @@ public class CategoryNotFoundException extends RuntimeException {
      * @apiNote     Exception is thrown when repository is null
      */
 
-    @Getter
-    private static final long serialVersionUID = Long.valueOf(UUID.randomUUID().toString());
+//    @Getter
+//    private static final long serialVersionUID = Long.valueOf(UUID.randomUUID().toString());
 
     @Getter
     private final String message;

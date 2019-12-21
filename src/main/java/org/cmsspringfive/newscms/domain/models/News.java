@@ -18,6 +18,7 @@ public class News {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     String id;
+
     String title;
     String content;
 

@@ -30,6 +30,7 @@ public class CategoryService {
     public Category create(CategoryRequest request){
         Category category =  new Category();
         category.setName(request.getName());
+
         return this.categoryRepository.save(category);
     }
 
@@ -45,6 +46,7 @@ public class CategoryService {
     }
 
     public List<Category> findByName(String id){
+
         return this.categoryRepository.findByName(id);
     }
 
@@ -52,7 +54,7 @@ public class CategoryService {
         return this.categoryRepository.findByNameIgnoreCaseStartingWith(name);
     }
 
-    public Category findOne(String id) throws CategoryNotFoundException {
+    public Category findById(String id) throws CategoryNotFoundException {
 
         final Optional<Category> category = this.categoryRepository.findById(id);
 

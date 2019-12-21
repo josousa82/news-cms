@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.cmsspringfive.newscms.domain.exceptions.CategoryNotFoundException;
 import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.service.CategoryService;
 import org.cmsspringfive.newscms.domain.vo.CategoryRequest;
@@ -11,8 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 @RestController
 @RequestMapping("/api/category")
@@ -31,10 +36,17 @@ public class CategoryResource {
     @ApiOperation(value = "Find category", notes = "Find the category by ID")
     @ApiResponses(value = {
          @ApiResponse(code = 200, message = "Category found"),
-         @ApiResponse(code = 400, message = "Category not found")
+         @ApiResponse(code = 404, message = "Category not found"),
     })
     public ResponseEntity<Category> findOne(@PathVariable("id") String id){
-        return ResponseEntity.ok(new Category());
+
+        final Category categoryDB = this.categoryService.findById(id);
+
+        if(categoryDB != null){
+            return new ResponseEntity<>(categoryService.findById(id), HttpStatus.FOUND);
+        }else{
+            throw new CategoryNotFoundException(id);
+        }
     }
 
     @GetMapping
@@ -58,7 +70,8 @@ public class CategoryResource {
             @ApiResponse(code = 400, message = "Category not found")
     })
     public ResponseEntity<Category> newCategory(CategoryRequest category){
-        return new ResponseEntity<>(new Category(), HttpStatus.CREATED);
+
+        return new ResponseEntity<>(categoryService.create(category), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -73,13 +86,15 @@ public class CategoryResource {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Create category", notes = "It permits to create a new category")
+    @ApiOperation(value = "Update category", notes = "It permits to update a category")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Category update successfully"),
             @ApiResponse(code = 400, message = "Category not found"),
             @ApiResponse(code = 404, message = "Invalid request")
     })
     public ResponseEntity<Category> updateCategory(@PathVariable("id") String id, CategoryRequest category){
+
+
        return new ResponseEntity<>(new Category(), HttpStatus.OK);
     }
 }

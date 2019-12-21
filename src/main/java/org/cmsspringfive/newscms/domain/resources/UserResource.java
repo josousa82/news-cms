@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.cmsspringfive.newscms.domain.models.User;
+import org.cmsspringfive.newscms.domain.service.UserService;
 import org.cmsspringfive.newscms.domain.vo.UserRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,12 @@ import java.util.List;
 @RequestMapping("/api/user")
 @Api(tags = "User", description = "User API")
 public class UserResource {
+
+    private final UserService userService;
+
+    public UserResource(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Find User", notes = "Find the user by ID")
@@ -58,7 +65,7 @@ public class UserResource {
             @ApiResponse(code = 400, message = "User not found")
     })
     public void removeUser(@PathVariable(value = "id") String id){
-
+        this.userService.removeUser(id);
     }
 
     @PutMapping("/{id}")

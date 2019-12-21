@@ -45,6 +45,7 @@ public class NewsResource {
             @ApiResponse(code = 400, message = "News not found")
     })
     public ResponseEntity<List<News>> findAll(){
+
         return ResponseEntity.ok(Arrays.asList(new News(), new News()));
     }
 
@@ -66,7 +67,7 @@ public class NewsResource {
             @ApiResponse(code = 400, message = "News not found")
     })
     public void removeNews(@PathVariable("id") String id){
-
+        this.newsService.removeNews(id);
     }
 
     @PutMapping("/{id}")
