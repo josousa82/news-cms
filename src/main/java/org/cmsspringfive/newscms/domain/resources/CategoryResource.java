@@ -13,9 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
 
@@ -26,6 +29,8 @@ import static java.util.Optional.ofNullable;
 public class CategoryResource {
 
     private final CategoryService categoryService;
+    private String id;
+    private CategoryRequest categoryRequest;
 
     public CategoryResource(CategoryService categoryService) {
         this.categoryService = categoryService;
@@ -55,12 +60,9 @@ public class CategoryResource {
             @ApiResponse(code = 200, message = "Category found"),
             @ApiResponse(code = 400, message = "Category not found")
     })
+
     public ResponseEntity<List<Category>> findAll(){
-
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category());
-
-        return ResponseEntity.ok(categoryList);
+        return ResponseEntity.ok(categoryService.findAll().stream().collect(Collectors.toList()));
     }
 
     @PostMapping
@@ -70,7 +72,6 @@ public class CategoryResource {
             @ApiResponse(code = 400, message = "Category not found")
     })
     public ResponseEntity<Category> newCategory(CategoryRequest category){
-
         return new ResponseEntity<>(categoryService.create(category), HttpStatus.CREATED);
     }
 
@@ -82,7 +83,7 @@ public class CategoryResource {
             @ApiResponse(code = 400, message = "Category not found")
     })
     public void deleteCategory(@PathVariable("id") String id){
-
+        categoryService.delete(id);
     }
 
     @PutMapping("/{id}")
@@ -92,9 +93,7 @@ public class CategoryResource {
             @ApiResponse(code = 400, message = "Category not found"),
             @ApiResponse(code = 404, message = "Invalid request")
     })
-    public ResponseEntity<Category> updateCategory(@PathVariable("id") String id, CategoryRequest category){
-
-
-       return new ResponseEntity<>(new Category(), HttpStatus.OK);
+    public ResponseEntity<Category> updateCategory(@PathVariable("id") String id, CategoryRequest categoryRequest){
+        return new ResponseEntity<>(categoryService.updateCategory(id, categoryRequest),HttpStatus.OK);
     }
 }
