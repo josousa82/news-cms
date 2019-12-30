@@ -29,7 +29,11 @@ public class News {
     Set<User> mandatoryReviewers = new HashSet<>();
 
     @ElementCollection
-    Set<Review> reviewers = new HashSet<>();
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "userId", column = @Column(name = "user_id")),
+            @AttributeOverride(name = "status", column = @Column(name = "review_status"))
+    })
+    private Set<Review> reviewers = new HashSet<>();
 
     @OneToMany
     Set<Category> categories = new HashSet<>();

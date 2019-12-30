@@ -1,0 +1,35 @@
+CREATE DATABASE newsCmsDB;
+GRANT ALL PRIVILEGES ON newsCmsDB.* TO mySqlRootUser WITH GRANT OPTION;
+
+USE `newsCmsDB`;
+
+DROP TABLE IF EXISTS `newsCmsDB`.`category`;
+
+CREATE TABLE `newsCmsDB`.`category`(
+
+    `id` VARCHAR(100) DEFAULT NULL,
+    `name` VARCHAR(255) DEFAULT NULL
+
+)ENGINE=INNODB DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE `newsCmsDB`.`system_user`(
+
+    `id` VARCHAR(100) DEFAULT NULL,
+    `identity` VARCHAR(255) DEFAULT NULL,
+    `name` VARCHAR(255) DEFAULT NULL,
+    `role` VARCHAR(255) DEFAULT NULL
+
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE `newsCmsDB`.`news`(
+
+    `id` VARCHAR(100) DEFAULT NULL,
+    `title` VARCHAR(255) DEFAULT NULL,
+    `content` MEDIUMTEXT DEFAULT NULL,
+    `user_id` VARCHAR(100),
+    `review_status` VARCHAR(100)
+
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
