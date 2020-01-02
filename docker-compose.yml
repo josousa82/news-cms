@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: db-docker_db_2
+    build:
+      context: src/main/resources/database/
+    ports:
+      - "8089:3306"
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+networks:
+  default:
+    external:
+      name: db-docker_default

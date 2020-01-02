@@ -1,8 +1,6 @@
 package org.cmsspringfive.newscms.domain.models;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,9 +15,13 @@ public class News {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "news_id")
     String id;
 
+    @Column(name = "news_title")
     String title;
+
+    @Column(name = "news_content")
     String content;
 
     @ManyToOne
@@ -50,7 +52,7 @@ public class News {
 
     public Boolean revised(){
         return this.mandatoryReviewers.stream().allMatch(reviewer -> this.reviewers.stream()
-                .anyMatch(review -> reviewer.id.equals(review.userId) && "approved".equals(review.status)));
+                .anyMatch(review -> reviewer.userId.equals(review.userId) && "approved".equals(review.status)));
     }
 
 }

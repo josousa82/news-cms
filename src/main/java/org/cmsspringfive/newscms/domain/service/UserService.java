@@ -27,9 +27,9 @@ public class UserService {
         final Optional<User> user = this.userRepository.findById(id);
         if(user.isPresent()){
             final User userDB = new User();
-            userDB.setIdentity(userRequest.getIdentity());
-            userDB.setName(userRequest.getName());
-            userDB.setRole(userRequest.getRole());
+            userDB.setUserIdentity(userRequest.getIdentity());
+            userDB.setUserName(userRequest.getName());
+            userDB.setUserRole(userRequest.getRole());
             return this.userRepository.save(userDB);
         }else{
             throw new UserNotFoundException("User with id " + id + " not found.");
@@ -40,9 +40,9 @@ public class UserService {
     @Transactional
     public User create(UserRequest userRequest){
         User user = new User();
-        user.setIdentity(userRequest.getIdentity());
-        user.setName(userRequest.getName());
-        user.setRole(userRequest.getRole());
+        user.setUserIdentity(userRequest.getIdentity());
+        user.setUserName(userRequest.getName());
+        user.setUserRole(userRequest.getRole());
         return this.userRepository.save(user);
     }
 

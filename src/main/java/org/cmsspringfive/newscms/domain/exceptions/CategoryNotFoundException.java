@@ -1,8 +1,11 @@
 package org.cmsspringfive.newscms.domain.exceptions;
 
 import lombok.Getter;
-import java.util.UUID;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class CategoryNotFoundException extends RuntimeException {
 
     /**
@@ -12,8 +15,6 @@ public class CategoryNotFoundException extends RuntimeException {
      * @apiNote     Exception is thrown when repository is null
      */
 
-//    @Getter
-//    private static final long serialVersionUID = Long.valueOf(UUID.randomUUID().toString());
 
     @Getter
     private final String message;
@@ -22,4 +23,8 @@ public class CategoryNotFoundException extends RuntimeException {
         super(message);
         this.message = message;
     }
+
+
+
+
 }

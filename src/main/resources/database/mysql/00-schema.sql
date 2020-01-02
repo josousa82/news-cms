@@ -1,5 +1,5 @@
 CREATE DATABASE newsCmsDB;
-GRANT ALL PRIVILEGES ON newsCmsDB.* TO mySqlRootUser WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON newsCmsDB.* TO root WITH GRANT OPTION;
 
 USE `newsCmsDB`;
 
@@ -15,20 +15,21 @@ CREATE TABLE `newsCmsDB`.`category`(
 
 CREATE TABLE `newsCmsDB`.`system_user`(
 
-    `id` VARCHAR(100) DEFAULT NULL,
-    `identity` VARCHAR(255) DEFAULT NULL,
-    `name` VARCHAR(255) DEFAULT NULL,
-    `role` VARCHAR(255) DEFAULT NULL
+    `user_id` VARCHAR(100) DEFAULT NULL,
+    `user_identity` VARCHAR(255) DEFAULT NULL,
+    `user_name` VARCHAR(255) DEFAULT NULL,
+    `user_role` VARCHAR(255) DEFAULT NULL
 
 )ENGINE = INNODB DEFAULT CHARSET = utf8;
 
 
 CREATE TABLE `newsCmsDB`.`news`(
 
-    `id` VARCHAR(100) DEFAULT NULL,
-    `title` VARCHAR(255) DEFAULT NULL,
-    `content` MEDIUMTEXT DEFAULT NULL,
+    `news_id` VARCHAR(100) DEFAULT NULL,
+    `news_title` VARCHAR(255) DEFAULT NULL,
+    `news_content` MEDIUMTEXT DEFAULT NULL,
     `user_id` VARCHAR(100),
+    `review_id` VARCHAR(100),
     `review_status` VARCHAR(100)
 
 ) ENGINE = INNODB DEFAULT CHARSET = utf8;
