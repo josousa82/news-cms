@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
@@ -53,21 +53,21 @@ public class CategoryService {
     }
 
 
-   // @Transactional
+   @Transactional
     public void delete(String id){
 
-        final Optional<Category> category = this.categoryRepository.findById(id);
+       final Optional<Category> category = this.categoryRepository.findById(id);
 
        category.ifPresentOrElse((t) -> this.categoryRepository.deleteById(t.getId()),
                () ->  new CategoryNotFoundException("Category with id " + id + " does not exist"));
-
-       // this.categoryRepository.deleteById(id);
     }
 
     public List<Category> findAll(){
 
         final List<Category> categoryList = categoryRepository.findAll();
+
         if(categoryList.isEmpty()){
+
             throw new CategoryNotFoundException("There are no categories yet!");
         }else {
             // return this.categoryRepository.findAll();
