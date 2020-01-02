@@ -1,16 +1,13 @@
 package org.cmsspringfive.newscms.domain.service;
 
 import com.google.common.base.Strings;
-import com.sun.jdi.request.InvalidRequestStateException;
 import org.cmsspringfive.newscms.domain.exceptions.CategoryNotFoundException;
 import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.repository.CategoryRepository;
 import org.cmsspringfive.newscms.domain.vo.CategoryRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
