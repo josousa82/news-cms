@@ -14,9 +14,6 @@ import java.util.UUID;
 public class NewsNotFoundException extends RuntimeException {
 
     @Getter
-    private final long exceptionUUID = Long.parseLong(String.valueOf(UUID.randomUUID()));
-
-    @Getter
     private final String message;
 
     public NewsNotFoundException(String message) {

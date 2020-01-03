@@ -1,6 +1,5 @@
 package org.cmsspringfive.newscms.domain.resources;
 
-import ch.qos.logback.classic.html.DefaultThrowableRenderer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -9,7 +8,7 @@ import org.cmsspringfive.newscms.domain.exceptions.CategoryNotFoundException;
 import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.repository.CategoryRepository;
 import org.cmsspringfive.newscms.domain.service.CategoryService;
-import org.cmsspringfive.newscms.domain.vo.CategoryRequest;
+import org.cmsspringfive.newscms.domain.voDtos.CategoryRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/category")
@@ -107,17 +105,7 @@ public class CategoryResource {
       }else{
 
          throw new CategoryNotFoundException("Category does not exist");
-
-         //return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-
-
-//        optionalCategory.ifPresentOrElse((t) -> {
-//            categoryService.delete(t.getId());
-//
-//        }, () -> new CategoryNotFoundException("Category with id " + id + " does not exist"));
-//        return new ResponseEntity(HttpStatus.OK);
+      }
     }
 
 

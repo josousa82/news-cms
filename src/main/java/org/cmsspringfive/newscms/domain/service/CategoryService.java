@@ -4,10 +4,12 @@ import com.google.common.base.Strings;
 import org.cmsspringfive.newscms.domain.exceptions.CategoryNotFoundException;
 import org.cmsspringfive.newscms.domain.models.Category;
 import org.cmsspringfive.newscms.domain.repository.CategoryRepository;
-import org.cmsspringfive.newscms.domain.vo.CategoryRequest;
+import org.cmsspringfive.newscms.domain.voDtos.CategoryRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class CategoryService {
 
 
     @Transactional
-    public Category create(CategoryRequest request){
+    public Category create(@Valid @RequestBody CategoryRequest request){
         Category category =  new Category();
         category.setName(request.getName());
         return this.categoryRepository.save(category);
@@ -32,7 +34,7 @@ public class CategoryService {
 
 
     @Transactional
-    public Category updateCategory(String id, CategoryRequest categoryRequest){
+    public Category updateCategory(String id, @Valid @RequestBody CategoryRequest categoryRequest){
 
         final Optional<Category> categoryToUpdate = this.categoryRepository.findById(id);
 

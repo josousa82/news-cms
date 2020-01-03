@@ -6,12 +6,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.cmsspringfive.newscms.domain.models.User;
 import org.cmsspringfive.newscms.domain.service.UserService;
-import org.cmsspringfive.newscms.domain.vo.UserRequest;
+import org.cmsspringfive.newscms.domain.voDtos.UserRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,9 +31,9 @@ public class UserResource {
             @ApiResponse(code = 200, message = "User found"),
             @ApiResponse(code = 400, message = "User not found")
     })
-    public ResponseEntity<User> findOne(@PathVariable(value = "id") String id){
+    public ResponseEntity<User> findUserById(@PathVariable(value = "id") String id){
 
-        return ResponseEntity.ok(new User());
+        return new ResponseEntity(userService.findUserById(id), HttpStatus.OK);
     }
 
     @GetMapping
@@ -44,8 +44,10 @@ public class UserResource {
     })
     public ResponseEntity<List<User>> getAll(){
 
-        return ResponseEntity.ok(Arrays.asList(new User(), new User()));
+        return ResponseEntity.ok(userService.findAll());
     }
+
+
 
     @PostMapping
     @ApiOperation(value = "Create User", notes = "It permits to create a new User")
@@ -53,8 +55,8 @@ public class UserResource {
             @ApiResponse(code = 200, message = "User created successfully"),
             @ApiResponse(code = 400, message = "User not found")
     })
-    public ResponseEntity<User> newUser(UserRequest userRequest){
-        return new ResponseEntity<>(new User(), HttpStatus.CREATED);
+    public ResponseEntity<User> newUser(@RequestBody @Valid UserRequest userRequest){
+        return new ResponseEntity<>(userService.create(userRequest), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -64,19 +66,20 @@ public class UserResource {
             @ApiResponse(code = 200, message = "User removed successfully"),
             @ApiResponse(code = 400, message = "User not found")
     })
-    public void removeUser(@PathVariable(value = "id") String id){
-        this.userService.removeUser(id);
+    public ResponseEntity removeUser(@PathVariable(value = "id") String id){
+
+        return new ResponseEntity<>(userService.removeUser(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Create User", notes = "It permits to create a new User")
+    @ApiOperation(value = "Update User", notes = "It permits to Update a existent User")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User update successfully"),
             @ApiResponse(code = 400, message = "User not found"),
             @ApiResponse(code = 404, message = "Invalid request")
     })
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") String id, User userRequest){
-        return new ResponseEntity<>(new User(), HttpStatus.OK);
+    public ResponseEntity<User> updateUser( @PathVariable(value = "id") String id, UserRequest userRequest){
+        return new ResponseEntity(this.userService.update(id, userRequest), HttpStatus.OK);
     }
 
 }

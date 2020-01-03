@@ -3,18 +3,14 @@ package org.cmsspringfive.newscms.domain.service;
 import com.google.common.collect.Lists;
 import org.cmsspringfive.newscms.domain.exceptions.NewsNotFoundException;
 import org.cmsspringfive.newscms.domain.models.News;
-import org.cmsspringfive.newscms.domain.models.User;
 import org.cmsspringfive.newscms.domain.repository.NewsRepository;
-import org.cmsspringfive.newscms.domain.vo.NewsRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.cmsspringfive.newscms.domain.voDtos.NewsRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)

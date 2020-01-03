@@ -1,4 +1,4 @@
-package org.cmsspringfive.newscms.domain.vo;
+package org.cmsspringfive.newscms.domain.voDtos;
 
 import lombok.Data;
 
